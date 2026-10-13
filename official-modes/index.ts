@@ -12,6 +12,7 @@
 // @amp-agent-mode {"key":"daybreak-blue","label":"Daybreak Blue","color":"#3b82f6"}
 // @amp-agent-mode {"key":"deepseek-v4.1-flash","label":"DeepSeek V4.1 Flash","color":"#60a5fa"}
 // @amp-agent-mode {"key":"gemini-3.8-flash","label":"Gemini 3.8 Flash","color":"#4285f4"}
+// @amp-agent-mode {"key":"gemini-4-argon","label":"Gemini 4 Argon","color":"#4285f4"}
 // @amp-agent-mode {"key":"glm-5.2","label":"GLM 5.2 (exp)","color":"#10a37f"}
 // @amp-agent-mode {"key":"glm-5.3","label":"GLM 5.3","color":"#10a37f"}
 // @amp-agent-mode {"key":"glm-5.3-flash","label":"GLM 5.3 Flash","color":"#84cc16"}
@@ -366,6 +367,26 @@ function registerGemini38Flash(amp: PluginAPI) {
 		key: 'gemini-3.8-flash',
 		label: 'Gemini 3.8 Flash',
 		description: 'Gemini 3.8 Flash on Vertex at high',
+		color: '#4285f4',
+		agent: agent.definition,
+	})
+}
+
+// ───── Gemini 4 Argon (gemini-4-argon) ─────
+
+function registerGemini4Argon(amp: PluginAPI) {
+	const agent = amp.createAgent({
+		name: 'gemini-4-argon',
+		extends: 'high',
+		model: 'google-vertex/gemini-4-argon',
+		reasoningEffort: 'high',
+		display: { label: 'Gemini 4 Argon', color: '#4285f4' },
+	})
+
+	amp.registerAgentMode({
+		key: 'gemini-4-argon',
+		label: 'Gemini 4 Argon',
+		description: 'Gemini 4 Argon on Vertex at high effort with Amp High behavior',
 		color: '#4285f4',
 		agent: agent.definition,
 	})
@@ -851,6 +872,7 @@ const MODE_REGISTRARS: Record<string, (amp: PluginAPI) => void> = {
 	'daybreak-blue': registerDaybreakBlue,
 	'deepseek-v4.1-flash': registerDeepSeekV4_1Flash,
 	'gemini-3.8-flash': registerGemini38Flash,
+	'gemini-4-argon': registerGemini4Argon,
 	'glm-5.2': registerGLM52,
 	'glm-5.3': registerGLM53,
 	'glm-5.3-flash': registerGLM53Flash,
