@@ -33,6 +33,7 @@ export const GROK_45_TOOL_NAMES = [
 	'set_schedule',
 	'update_schedule',
 	'clear_schedule',
+	'create_github_subscription',
 	'web_search',
 	'mcp__*',
 	'plugin__*',

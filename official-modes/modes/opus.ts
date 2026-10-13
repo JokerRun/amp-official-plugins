@@ -154,6 +154,7 @@ export const OPUS_TOOL_NAMES = [
 	'set_schedule',
 	'update_schedule',
 	'clear_schedule',
+	'create_github_subscription',
 	'update_thread',
 	'send_message_to_puck',
 	'mcp__*',

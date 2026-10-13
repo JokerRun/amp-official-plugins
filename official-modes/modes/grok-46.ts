@@ -196,6 +196,7 @@ export const GROK_46_TOOL_NAMES = [
 	'set_schedule',
 	'update_schedule',
 	'clear_schedule',
+	'create_github_subscription',
 	'create_slack_trigger',
 	'x_read',
 	'x_reply',

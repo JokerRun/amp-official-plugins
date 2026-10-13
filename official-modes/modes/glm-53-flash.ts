@@ -71,6 +71,7 @@ export const GLM_53_FLASH_TOOL_NAMES = [
 	'set_schedule',
 	'update_schedule',
 	'clear_schedule',
+	'create_github_subscription',
 	'ask_user_choice',
 	'skill',
 	'load_plugin',

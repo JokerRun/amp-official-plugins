@@ -16,6 +16,7 @@ const requiredTools = [
 	'set_schedule',
 	'update_schedule',
 	'clear_schedule',
+	'create_github_subscription',
 	'load_plugin',
 	'reload_plugins',
 	'reload_skills',

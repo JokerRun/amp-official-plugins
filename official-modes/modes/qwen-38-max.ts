@@ -81,6 +81,7 @@ export const QWEN_38_MAX_TOOL_NAMES = [
 	'set_schedule',
 	'update_schedule',
 	'clear_schedule',
+	'create_github_subscription',
 	'skill',
 	'load_plugin',
 	'reload_plugins',

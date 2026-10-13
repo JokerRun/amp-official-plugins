@@ -87,6 +87,7 @@ export const GPT_56_TOOL_NAMES = [
 	'set_schedule',
 	'update_schedule',
 	'clear_schedule',
+	'create_github_subscription',
 	'librarian',
 	'oracle',
 	'finder',
