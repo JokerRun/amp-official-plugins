@@ -29,6 +29,7 @@
 // @amp-agent-mode {"key":"grok47","label":"Grok 4.7","color":"#0ea5e9"}
 // @amp-agent-mode {"key":"kimi-k3","label":"Kimi K3","color":"#3b82f6"}
 // @amp-agent-mode {"key":"muse-spark","label":"Muse Spark 1.3","color":"#0668e1"}
+// @amp-agent-mode {"key":"muse-wonder","label":"Muse Wonder","color":"#0668e1"}
 // @amp-agent-mode {"key":"minimax-m3","label":"MiniMax M3","color":"#f97316"}
 // @amp-agent-mode {"key":"qwen3.8-max","label":"Qwen3.8 Max","color":"#a855f7"}
 
@@ -750,6 +751,26 @@ function registerMuseSpark(amp: PluginAPI) {
 	})
 }
 
+// ───── Muse Wonder (muse-wonder) ─────
+
+function registerMuseWonder(amp: PluginAPI) {
+	const agent = amp.createAgent({
+		name: 'muse-wonder',
+		extends: 'ultra',
+		model: 'meta/muse-wonder-1.0',
+		reasoningEffort: 'max',
+		display: { label: 'Muse Wonder', color: '#0668e1' },
+	})
+
+	amp.registerAgentMode({
+		key: 'muse-wonder',
+		label: 'Muse Wonder',
+		description: 'Muse Wonder at max reasoning effort with Amp Ultra behavior',
+		color: '#0668e1',
+		agent: agent.definition,
+	})
+}
+
 // ───── MiniMax M3 (minimax-m3) ─────
 
 function registerMiniMaxM3(amp: PluginAPI) {
@@ -847,6 +868,7 @@ const MODE_REGISTRARS: Record<string, (amp: PluginAPI) => void> = {
 	'grok47': registerGrok47,
 	'kimi-k3': registerKimiK3,
 	'muse-spark': registerMuseSpark,
+	'muse-wonder': registerMuseWonder,
 	'minimax-m3': registerMiniMaxM3,
 	'qwen3.8-max': registerQwen38Max,
 }
