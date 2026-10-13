@@ -73,7 +73,7 @@ trap - EXIT
   `set viewport <w> <h> 2` after the first `open` of a new or restarted session and after any
   `set viewport` that omits the scale, which resets that tab to 1x. Check with
   `eval devicePixelRatio` before capturing. Image pixel coordinates are then 2x the CSS values;
-  selector clips are unaffected. Recordings stay at 1x.
+  selector clips are unaffected.
 - Set screenshot scale with `set viewport`, not Chromium's `--force-device-scale-factor` launch
   flag. Combining the launch flag with viewport DPR produces incorrectly sized full-page captures.
 - `set viewport`, `set device`, and init scripts apply to the current tab only. A popup opened by
@@ -117,6 +117,33 @@ agent-browser --session app --executable-path /tmp/chrome-desktop-pointer.sh ope
 
 Verify `eval "matchMedia('(hover: hover)').matches"` is `true` before trusting hover results. A
 relaunch without the wrapper reverts.
+
+## Interaction recordings
+
+Record a clip when a change affects how UI responds to the pointer or keyboard: hover states,
+menus, popovers, inline forms, focus, or transitions. A clip shows what a person sees while moving
+through the UI; screenshots of the end states do not.
+
+- Launch through the hover wrapper above first, or the clip shows touch fallbacks.
+- Start with `record start <absolute .mp4 path> --cursor`. The cursor overlay follows the real
+  pointer and shows click feedback. Recordings use the tab's device pixel ratio, so a 2x viewport
+  records at 2x.
+- Move with real input: `mouse move <x> <y> --human` and `click <selector> --human`. Real moves fire
+  hover events on every element along the path. `hover <selector>` jumps straight to the target and
+  skips everything between.
+- Tour the area the way a person would. Pass over neighboring rows and similar controls before
+  the target, click, wait for the result to appear, then keep moving inside the new UI so its hover
+  states show too. Hold about one second after each move, since many hover effects appear after a
+  delay.
+- Type with `click <field> --human` and then `keyboard type "<text>"`, so each keystroke shows.
+  Never type secrets into a recording.
+- Cut idle stretches between commands before sharing, and keep clips under about 30 seconds.
+- The transcript plays a video once. For a clip that loops, also embed an animated WebP:
+  `ffmpeg -i clip.mp4 -vf fps=25 -c:v libwebp_anim -quality 75 -loop 0 -an clip.loop.webp`.
+- Check the clip frame by frame. Video analysis samples about one frame per second and misses
+  short hover states, so extract frames and view them as a contact sheet:
+  `ffmpeg -i clip.mp4 -vf fps=5,scale=640:-1 /tmp/f%03d.png` and
+  `magick montage /tmp/f*.png -tile 4x -geometry +4+4 sheet.png`.
 
 ## Touch and mobile
 

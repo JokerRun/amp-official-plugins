@@ -95,8 +95,8 @@ Run the whole matrix from step 1, not only the reported case.
 
 Gather more than one kind of evidence per claim, so that each kind covers the others' blind spots:
 
-- **Visual**: screenshots of each state, a recording when motion or timing matters, side-by-side
-  before and after images, and frame strips for fast transitions.
+- **Visual**: screenshots of each state, a recording when hover, clicks, focus, motion, or timing
+  matter, side-by-side before and after images, and frame strips for fast transitions.
 - **State**: DOM and accessibility facts, database rows, files and git state on disk, API
   responses, and process lists.
 - **Logs**: timestamped server, client, and worker lines that show the code path taken, correlated
@@ -143,7 +143,7 @@ sandboxes, branches, and rows in staging services.
 | Change | Decisive evidence |
 | --- | --- |
 | Visual or layout bug | Before and after screenshots of the same state; measured positions or sizes; every affected size, theme, and input method |
-| Interaction or flow | A recording of the real flow; state facts after each step; the state after a reload |
+| Interaction or flow | A recording of the real flow with a real moving pointer that also passes over neighboring elements; state facts after each step; the state after a reload |
 | Race, crash, or timing bug | Failure reproduced with the timing forced; logs showing the bad interleaving before and its absence after; a test that fails when the fix is reverted |
 | Distributed or backend behavior | Timestamped logs across components; database and API state before and after; the failure and recovery paths |
 | Performance | Median before and after over repeated runs with the same input; profiles showing where the time went |
