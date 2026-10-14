@@ -142,8 +142,8 @@ These guidance files are delivered dynamically in the conversation context after
 `
 
 /**
- * Appended to the built-in Medium and Ultra prompts by the grok46-medium and grok46-high modes.
- * Each rule targets a Grok 4.6 failure mode that several independent reports describe and that
+ * Appended to the built-in Medium and Ultra prompts by the grok47-medium and grok47-high modes.
+ * Each rule targets a Grok 4.6/4.7 failure mode that several independent reports describe and that
  * the base prompts do not cover for xAI models.
  */
 export const GROK_46_EXTENDED_MODE_INSTRUCTIONS = `- Report a task as done only when tool output shows that the result works. When a check fails or the result falls short of the request, fix it and check again; repeat until it passes or you reach a blocker you can name.
