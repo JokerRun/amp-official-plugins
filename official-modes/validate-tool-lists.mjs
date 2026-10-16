@@ -17,6 +17,11 @@ const requiredTools = [
 	'update_schedule',
 	'clear_schedule',
 	'create_github_subscription',
+	'slack_read',
+	'slack_write',
+	'slack_read_user_profile',
+	'slack_list_user_channels',
+	'slack_list_channel_members',
 	'load_plugin',
 	'reload_plugins',
 	'reload_skills',
@@ -52,5 +57,5 @@ for (const file of readdirSync(modesDirectory).filter((file) =>
 }
 
 console.log(
-	'Every explicit mode tool list includes thread coordination, file transfer, schedule, plugin and skill reload, and Ship archival tools',
+	'Every explicit mode tool list includes thread coordination, file transfer, schedule, Slack, plugin and skill reload, and Ship archival tools',
 )
