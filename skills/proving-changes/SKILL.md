@@ -79,6 +79,14 @@ Use the strongest level the environment allows, and name the level in the report
 internal API, rendering an isolated component story, or injecting a mocked client skips code the
 user hits. If you must take such a shortcut, name what it skipped.
 
+When the change adds a branch, such as a new platform, provider, environment, or error path, run
+that branch. A passing neighbor does not prove it: Linux runs do not cover new macOS code, and the
+fallback renderer does not cover the new inline one. If the branch cannot run here, report it as
+unproven.
+
+When a dependency is out of reach, build a stand-in for that one part and keep the rest of the path
+real. See Reaching the real path.
+
 For packaged software, test the artifact that ships: the built container, bundle, binary, or
 installed package. A file missing from the package breaks production while every source-tree test
 passes.
@@ -126,17 +134,95 @@ happened:
 Treat unexplained differences between runs as findings. Run both sides enough times to tell
 flakiness that exists on the base from flakiness the change introduced.
 
-### 7. Prove what will ship
+### 7. Account for the whole diff
 
-Rebase onto the current target branch and rerun the decisive cases before reporting. Proof against
-an old base does not cover the code that will merge.
-
-Account for the whole diff. For every removed line, changed comment, touched shared file,
-configuration edit, and secret, either show that it is required or remove it. A refactor needs
-evidence that behavior is identical, not only that tests pass.
+For every removed line, changed comment, touched shared file, configuration edit, and secret,
+either show that it is required or remove it. A refactor needs evidence that behavior is identical,
+not only that tests pass.
 
 Afterwards, delete what the proof created in shared systems: test accounts, organizations,
 sandboxes, branches, and rows in staging services.
+
+## Reaching the real path
+
+The real path is often blocked: an external API without a usable sandbox, a bug that needs a hung
+process or a second machine, a native app shell, or a timing window of milliseconds. Before falling
+back to a unit test, build the missing piece. Each technique below replaces one unreachable part and
+keeps everything else real.
+
+**External services**
+
+- Use the vendor's local tooling when it exists: an official mock server, a CLI that forwards and
+  triggers webhooks, a local emulator of a cloud service, an S3-compatible object store, or an SMTP
+  sink that captures mail.
+- Otherwise build a fake of the API surface the code uses: a local HTTP server with realistic
+  responses, state, errors, pagination, and idempotency, which sends webhooks signed with the
+  vendor's real signing scheme. Point the app at it through its existing base-URL configuration. A
+  fake Stripe, for example, creates customers and subscriptions, declines a card on request, and
+  posts signed `invoice.payment_failed` events.
+- Ground the fake in the vendor's published API spec or in recorded real responses. Name the faked
+  boundary in the report: a fake proves the code against your model of the vendor, not the vendor
+  itself.
+- For sign-in, run a local mock identity provider and complete the real redirects in a browser.
+- Replace a nondeterministic dependency, such as a language model, with a scripted stand-in when
+  the change is not about that dependency, so that both runs get identical input.
+
+**Failures and timing**
+
+- Freeze a dependency with `kill -STOP` and resume it with `kill -CONT` to simulate a hang. Kill it
+  with `kill -9` to test crash recovery.
+- Delay, drop, or fail chosen requests with browser request interception or a proxy that adds
+  latency and resets connections.
+- Force a bad interleaving with a gate in the code under test, or with a delay injected identically
+  in both runs.
+- Fake the clock, or rewind a poller's cursor, to reach expiry, retry, and polling windows without
+  waiting.
+- Cause the failure on purpose: fill the disk, make a config file read-only, revoke a permission, or
+  expire a token.
+
+**Environments and states**
+
+- Simulate a second machine or client with a separate home or state directory or browser profile.
+  Use a second real account for permission and multiplayer cases.
+- Build the old and new versions side by side to test mixed versions, such as an old client against
+  a new server.
+- Recreate the reporter's environment: the repository shape (no remote, a stale remote default
+  branch, a path with spaces), the data volume (the same message count), and the OS settings (text
+  size, theme, locale).
+- When a native app wraps web content, inject the same bridge script the native shell runs into a
+  browser to reproduce the shell's state, then confirm on a simulator or device when one exists.
+- Seed the database with production-shaped data. For query plans, scale the planner statistics to
+  production size.
+
+**Observing what the user cannot see**
+
+- Read the persisted result, such as the stored tool output, the database row, or the commit, rather
+  than a UI's or an agent's report of it.
+- Inspect a launched process's real arguments and environment, for example through
+  `/proc/<pid>/cmdline` and `/proc/<pid>/environ` on Linux.
+- Count resources before, during, and after: open file descriptors, file watches, sockets, and child
+  processes.
+- Record network traffic as a HAR file to count requests, bytes, and repeated fetches.
+- For a terminal UI, capture the pane with its colors and render it, or run a real terminal emulator
+  and record its window.
+- When a change must prevent something, assert its absence: no mail in the sink, no row written, no
+  process spawned.
+
+## When validation tooling is missing
+
+If the proof needs setup the repository lacks, build it as reusable tooling instead of one-off test
+code, so that the next proof can run on demand. For example:
+
+- A dev server whose logs from every component are easy to read and search
+- One command that starts the app and its dependencies end to end
+- A seeded test account with a signed-in browser session
+- A local fake of an external service
+- Fixtures that recreate common repository and data states
+
+Put it where the repository keeps similar tooling, such as its scripts, setup files, or agent
+guidance, and name it in the report so that the user can decide whether to keep it. Do not commit
+one-off proof scripts or extra tests only to leave a record of the proof. The report and its
+artifacts are the record.
 
 ## Evidence by kind of change
 
@@ -185,4 +271,5 @@ unless you show that it occurred and was handled.
   removed comment revealed that it was not.
 - A packaging step omitted a new file, so the deployed service would have crashed at startup.
 - A demo showed placeholder output, so it proved streaming but not the feature.
-- The proof ran against a base many commits behind, and the merge changed the result.
+- The proof ran the existing Linux path while the new code handled macOS, so the new branch never
+  executed.
