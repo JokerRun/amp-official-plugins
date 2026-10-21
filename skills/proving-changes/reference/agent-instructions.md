@@ -1,12 +1,12 @@
 # Proving a change to agent instructions
 
-Agent instructions are text that a model reads to decide how to act: system prompts, AGENTS.md and other guidance files, skills, tool and parameter descriptions, and prompt templates. Reading the new text proves nothing about behavior. The proof is what fresh agents do with it.
+Agent instructions are text that a model reads to decide how to act: system prompts, AGENTS.md and other guidance files, skills, tool and parameter descriptions, and prompt templates. Reading the new text proves nothing about behavior. The proof is what fresh agents do with it: an eval, which runs fresh agents on realistic requests and counts how often they behave as intended.
 
 ## Plan the eval
 
 - **Target behavior**: one sentence naming what agents must now do, for example "uses the credits plugin whenever a user asks to grant credits".
-- **Positive cases**: three to five realistic requests that should trigger the behavior, phrased the way users actually ask. Do not name the tool, file, or rule in the request; a request that names it tests reading, not the instruction.
-- **Negative controls**: one or two nearby requests where the behavior must not happen, to catch an instruction that now fires too often.
+- **Cases that should trigger it**: three to five realistic requests that should trigger the behavior, phrased the way users actually ask. Do not name the tool, file, or rule in the request; a request that names it tests reading, not the instruction.
+- **Cases that must not trigger it**: one or two nearby requests where the behavior must not happen, to catch an instruction that now fires too often.
 - **Runs**: at least three fresh agents per case, for both the old text and the new text, with the real system prompt, tools, and repository.
 
 Running many agents costs time and money. When the user asked for proof, run the eval. Otherwise, propose it with its size and wait for approval.
