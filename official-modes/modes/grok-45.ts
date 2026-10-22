@@ -8,6 +8,7 @@ export const GROK_45_TOOL_NAMES = [
 	'find_thread',
 	'finder',
 	'get_thread_status',
+	'set_thread_status',
 	'librarian',
 	'oracle',
 	'painter',

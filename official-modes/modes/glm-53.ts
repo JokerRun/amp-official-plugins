@@ -22,6 +22,7 @@ export const GLM_53_TOOL_NAMES = [
 	'read_thread',
 	'create_thread',
 	'get_thread_status',
+	'set_thread_status',
 	'send_thread_message',
 	'update_thread',
 	'wait_for_threads',

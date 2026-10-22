@@ -145,6 +145,7 @@ export const OPUS_TOOL_NAMES = [
 	'read_mcp_resource',
 	'create_thread',
 	'get_thread_status',
+	'set_thread_status',
 	'send_thread_message',
 	'wait_for_threads',
 	'download_thread_file',

@@ -166,6 +166,7 @@ export const GROK_46_TOOL_NAMES = [
 	'list_runners',
 	'create_thread',
 	'get_thread_status',
+	'set_thread_status',
 	'send_thread_message',
 	'ship_thread_changes',
 	'update_thread',

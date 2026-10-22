@@ -62,6 +62,7 @@ export const DEEPSEEK_V4_1_FLASH_TOOL_NAMES = [
 	'find_thread',
 	'create_thread',
 	'get_thread_status',
+	'set_thread_status',
 	'send_thread_message',
 	'update_thread',
 	'wait_for_threads',

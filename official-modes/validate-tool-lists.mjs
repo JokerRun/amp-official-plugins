@@ -6,6 +6,7 @@ const modesDirectory = new URL('./modes/', import.meta.url)
 const requiredTools = [
 	'create_thread',
 	'get_thread_status',
+	'set_thread_status',
 	'send_thread_message',
 	'update_thread',
 	'wait_for_threads',
