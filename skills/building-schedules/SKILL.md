@@ -1,6 +1,6 @@
 ---
 name: building-schedules
-description: "Sets and manages this thread’s schedule for reminders and recurring checks. Use only when explicitly asked to schedule, follow up later, monitor, or manage an existing schedule. For event monitoring, search for a supported event subscription first. Load FIRST—before using schedule management tools."
+description: "Sets and manages this thread’s schedule for reminders and recurring checks. Use only when explicitly asked to schedule, follow up later, monitor, or manage an existing schedule. For event monitoring, search for a supported event subscription first. Load FIRST—before using schedule management tools. Not for snoozing a thread: to hide a thread until later, snooze it with update_thread."
 ---
 
 # Setting Schedules
