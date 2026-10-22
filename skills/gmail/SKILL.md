@@ -50,7 +50,9 @@ Use the connected Gmail account to search, read, send, archive, and label email.
   recipients, subject, and body, and the email goes out only if they approve. The thread waits
   until they answer. If they decline, do not retry or work around it; offer to change the email.
   When they edited the email, the result includes userEdited: true and the sentEmail that went
-  out; describe what was actually sent.
+  out; describe what was actually sent. To send several separate emails, make all the
+  send_message calls as parallel tool calls in one turn instead of waiting for each to finish;
+  each email gets its own dialog.
 - Set requireConfirmation: true whenever the user asked to review, approve, or see the email
   first, or when the email is sensitive, so the dialog appears even at the Send level.
 - To send a reply on an existing conversation, first use read_message on the original message,
