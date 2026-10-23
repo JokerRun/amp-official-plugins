@@ -37,7 +37,6 @@ Before non-trivial work, settle four things, from the request or the codebase:
 - Read a file with the Read tool before editing it; use shell_command for commands, search, builds, and tests.
 - Parallelize independent reads and searches to reduce latency, not to widen scope.
 - Never edit the same file from two calls at once; read immediately before editing.
-- Use oracle when stuck or when you need architecture-level guidance.
 - Ask before destructive actions such as deleting files, resetting changes, or force-pushing, and do not commit unless the user asks.
 </tool_use>
 
@@ -118,7 +117,6 @@ Self-check before you call UI done — the AI-slop test: if someone could glance
 
 export const GLM_52_TOOL_NAMES = [
 	'Read',
-	'finder',
 	'shell_command',
 	'shell_command_status',
 	'create_file',
@@ -150,8 +148,6 @@ export const GLM_52_TOOL_NAMES = [
 	'load_plugin',
 	'reload_plugins',
 	'reload_skills',
-	'oracle',
-	'librarian',
 	'view_media',
 	'painter',
 	'read_mcp_resource',

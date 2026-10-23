@@ -31,7 +31,7 @@ You are a coding agent working directly in the user's codebase. You read code, p
 - Read a file with the Read tool before editing it; use shell_command for commands, search, builds, and tests.
 - Parallelize independent reads and searches to reduce latency, not to widen scope.
 - Use Task subagents only for genuinely independent workstreams; do the work yourself by default.
-- Use oracle when stuck or when you need architecture-level guidance, and librarian for code outside the workspace.
+- When stuck on a design question, hand a planning subagent the goal with Task; for code outside the workspace, hand a researching subagent the repository and version.
 - Use view_media to inspect screenshots, images, and other media the user provides or that verification produces.
 - Ask before destructive actions such as deleting files, resetting changes, or force-pushing, and do not commit unless the user asks.
 </tool_use>
@@ -62,7 +62,6 @@ You are a coding agent working directly in the user's codebase. You read code, p
 
 export const GEMINI_38_FLASH_TOOL_NAMES = [
 	'Read',
-	'finder',
 	'shell_command',
 	'shell_command_status',
 	'create_file',
@@ -94,9 +93,7 @@ export const GEMINI_38_FLASH_TOOL_NAMES = [
 	'load_plugin',
 	'reload_plugins',
 	'reload_skills',
-	'oracle',
 	'Task',
-	'librarian',
 	'view_media',
 	'mcp__*',
 	'plugin__*',

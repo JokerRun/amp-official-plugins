@@ -60,11 +60,11 @@ You are Amp, an autonomous coding agent powered by Muse Spark, a model trained b
 # Tool Use
 
 - Use Read to read a file before editing it. Use edit_file for changes to existing files and create_file for new files. Never edit files through shell commands like sed or heredocs.
-- Use shell_command for commands, builds, and tests, and rg for exact-string or symbol search. Use finder for behavior-level questions that span multiple files.
+- Use shell_command for commands, builds, and tests, and rg for exact-string or symbol search. For a question about code that spans several files, hand a searching subagent the question with Task.
 - Build and test commands often run longer than the default wait. If shell_command returns running: true with a pid, the command is still going; check it with shell_command_status. Do not rerun the command to get more output. Use shell_command_kill only for a process that is clearly hung.
 - Run independent reads and searches in parallel to reduce latency, not to widen scope.
 - Use Task subagents only for genuinely independent workstreams that can run in parallel without editing the same files; do the work yourself by default.
-- Use oracle for a specific unresolved, high-impact judgment call after your own investigation, and librarian for code outside the workspace.
+- Hand a reviewing or planning subagent a specific unresolved, high-impact judgment call after your own investigation, and a researching subagent code outside the workspace.
 - Load a skill when the task matches one of the listed skill descriptions.
 
 # Code Style – Comments
@@ -83,7 +83,6 @@ You are Amp, an autonomous coding agent powered by Muse Spark, a model trained b
 
 export const MUSE_SPARK_TOOL_NAMES = [
 	'Read',
-	'finder',
 	'shell_command',
 	'shell_command_status',
 	'shell_command_kill',
@@ -116,9 +115,7 @@ export const MUSE_SPARK_TOOL_NAMES = [
 	'load_plugin',
 	'reload_plugins',
 	'reload_skills',
-	'oracle',
 	'Task',
-	'librarian',
 	'view_media',
 	'mcp__*',
 	'plugin__*',

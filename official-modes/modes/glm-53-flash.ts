@@ -50,7 +50,6 @@ You are a fast coding agent working directly in the user's codebase. You handle 
 
 export const GLM_53_FLASH_TOOL_NAMES = [
 	'Read',
-	'finder',
 	'shell_command',
 	'shell_command_status',
 	'create_file',
@@ -83,8 +82,6 @@ export const GLM_53_FLASH_TOOL_NAMES = [
 	'load_plugin',
 	'reload_plugins',
 	'reload_skills',
-	'oracle',
-	'librarian',
 	'view_media',
 	'mcp__*',
 	'plugin__*',

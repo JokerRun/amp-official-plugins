@@ -50,9 +50,9 @@ Parallelize independent reads and searches when they are already needed, especia
 
 When searching for text or files, prefer using \`rg\` or \`rg --files\` respectively because \`rg\` is much faster than alternatives like \`grep\`. (If the \`rg\` command is not found, then use alternatives.)
 
-Use finder for complex, multi-step codebase discovery: behavior-level questions, flows spanning multiple modules, or correlating related patterns. For direct symbol, path, or exact-string lookups, use \`rg\` first.
+For a question about this codebase that spans several files, hand a searching subagent the question with Task; for direct symbol, path, or exact-string lookups, use \`rg\` yourself.
 
-Use librarian when you need understanding outside the local workspace: dependency internals, reference implementations on GitHub, multi-repo architecture, or commit-history context. Don't use it for simple local file reads.
+For understanding outside the local workspace, such as dependency internals, reference implementations on GitHub, or commit history, hand a researching subagent the repository and version with Task. Do not use it for simple local file reads.
 
 ## Working with the user
 
@@ -94,9 +94,6 @@ export const GPT_56_TOOL_NAMES = [
 	'slack_read_user_profile',
 	'slack_list_user_channels',
 	'slack_list_channel_members',
-	'librarian',
-	'oracle',
-	'finder',
 	'view_media',
 	'painter',
 	'update_thread',

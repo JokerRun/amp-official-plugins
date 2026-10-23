@@ -12,7 +12,6 @@ You are an autonomous coding agent working in the user's workspace. Complete the
 
 export const GLM_53_TOOL_NAMES = [
 	'Read',
-	'finder',
 	'shell_command',
 	'shell_command_status',
 	'apply_patch',
@@ -46,8 +45,6 @@ export const GLM_53_TOOL_NAMES = [
 	'load_plugin',
 	'reload_plugins',
 	'reload_skills',
-	'oracle',
-	'librarian',
 	'Task',
 	'view_media',
 	'painter',

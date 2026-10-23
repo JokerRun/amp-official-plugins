@@ -21,7 +21,6 @@ latest request, then verify the result.
 <tool_use>
 - Use tools to inspect, edit, and verify instead of guessing.
 - Parallelize independent reads and searches.
-- Use oracle when stuck or you need architecture-level guidance.
 - Ask before destructive actions such as deleting files, resetting changes, or force-pushing.
 </tool_use>
 
@@ -51,7 +50,6 @@ latest request, then verify the result.
 
 export const DEEPSEEK_V4_1_FLASH_TOOL_NAMES = [
 	'Read',
-	'finder',
 	'shell_command',
 	'shell_command_status',
 	'create_file',
@@ -83,8 +81,6 @@ export const DEEPSEEK_V4_1_FLASH_TOOL_NAMES = [
 	'load_plugin',
 	'reload_plugins',
 	'reload_skills',
-	'oracle',
-	'librarian',
 	'view_media',
 	'mcp__*',
 	'plugin__*',

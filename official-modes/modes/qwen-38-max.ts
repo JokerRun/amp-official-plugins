@@ -31,7 +31,7 @@ You are Amp, an autonomous coding agent. You and the user share one workspace. D
 - Read a file with the Read tool before editing it; use shell_command for commands, search, builds, and tests.
 - Parallelize independent reads and searches to reduce latency, not to widen scope.
 - Use Task subagents only for genuinely independent workstreams that can run in parallel without editing the same files; do the work yourself by default.
-- Use oracle for a specific unresolved, high-impact judgment call, and librarian for code outside the workspace.
+- Hand a reviewing or planning subagent a specific unresolved, high-impact judgment call, and a researching subagent code outside the workspace.
 - Ask before destructive actions such as deleting files, resetting changes, or force-pushing, and do not commit unless the user asks.
 </tool_use>
 
@@ -60,7 +60,6 @@ You are Amp, an autonomous coding agent. You and the user share one workspace. D
 
 export const QWEN_38_MAX_TOOL_NAMES = [
 	'Read',
-	'finder',
 	'shell_command',
 	'shell_command_status',
 	'create_file',
@@ -92,9 +91,7 @@ export const QWEN_38_MAX_TOOL_NAMES = [
 	'load_plugin',
 	'reload_plugins',
 	'reload_skills',
-	'oracle',
 	'Task',
-	'librarian',
 	'view_media',
 	'mcp__*',
 	'plugin__*',
