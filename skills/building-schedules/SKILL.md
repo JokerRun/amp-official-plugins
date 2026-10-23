@@ -78,7 +78,8 @@ host a `fresh` schedule the current thread cannot host (see Choose the run mode)
    Schedule checks no more frequently than that. If a deployment runs every two hours, check after
    its next run and recur at roughly that cadence if completion may take multiple runs; do not
    default to checking every 10 minutes. Have the run clear the schedule when the condition is
-   met, and do not report unchanged state on every run unless the user asks for progress updates.
+   met. When nothing changed, the run gives a short, concise update instead of a full report,
+   unless the user asks for progress updates.
 
 ## Choose the run mode
 
@@ -143,7 +144,8 @@ Another timezone:
 Write the prompt as the instructions the run follows every time, not as a description of the
 schedule. Include the action, the evidence to inspect, the report or no-change behavior, and the
 stop conditions. Keep the cadence in the trigger, not in the prompt. Do not ask the run to create
-status files or announce no-op results unless the user requested that behavior. In `existing`
+status files unless the user requested that behavior. When no action is necessary, have the run
+give a short, concise update; never ask it to end the turn without a reply. In `existing`
 mode the run has the host's history; in `fresh` mode it has none, so spell out every input.
 
 ## After setting
@@ -183,8 +185,8 @@ so the cadence follows the source and the run clears the schedule when done.
       schedule: "RRULE:FREQ=HOURLY;INTERVAL=2"
       schedule_label: "Every 2 hours"
       prompt: "Run curl https://example.com/__version. If it reports commit abc1234, tell the
-        user the deployment is live and call clear_schedule. Otherwise end the turn without
-        reporting."
+        user the deployment is live and call clear_schedule. Otherwise give a short, concise
+        update that it is not live yet."
 
 From Puck: "Every weekday, run the flaky-test report in a new thread." The user asked for a new
 thread per run, so this is `fresh`. Puck cannot host it, so first create an orb thread in the
