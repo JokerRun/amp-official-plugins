@@ -157,3 +157,12 @@ surface for the whole toolset, so make it state when to use the tools.
   load the new version automatically, but existing threads do not. Offer
   `reload_plugins` (when available) to update the current thread.
 - Never mix local and global plugins for the same scope in one request.
+
+## Reporting plugin changes
+
+Plugin files usually live outside the workspace or in gitignored directories, so
+they do not appear in the Changes tab. In every reply that reports plugin files
+you created or changed, link each file by its absolute path, for example
+`[oracle.ts](file:///home/user/.cache/amp/repositories/ampcode.com-user-plugins/oracle.ts)`.
+Link the files where they live; do not copy them elsewhere just to make them
+linkable.
