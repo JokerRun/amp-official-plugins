@@ -114,8 +114,8 @@ try {
 				'Math.ceil(document.documentElement.getBoundingClientRect().height)',
 			)
 			const shot = join(outDir, `${name}-${theme}-${width}.png`)
-			// Crop to the content, like the inline frame does (up to its 1200px limit).
-			browser('set', 'viewport', String(width), String(Math.min(1200, Number(height) + 8)), '2')
+			// Crop to the content, like the inline frame does.
+			browser('set', 'viewport', String(width), String(Number(height) + 8), '2')
 			browser('screenshot', shot)
 			const errors = JSON.parse(browser('errors', '--json')).data?.errors ?? []
 			console.log(`${theme} ${width}px: ${shot} (content height ${height.trim()}px)`)

@@ -53,8 +53,10 @@ title; for a mockup it decides which state to show.
 
 - The view is as wide as the reply column: about 720px on desktop and 360px on phones. Design
   for both.
-- Its height fits the document, up to 1200px; beyond that it scrolls, and the reader can open it
-  full screen. Aim for under 600px.
+- Its height fits the document, so the whole view shows in the reply without scrolling inside
+  it, and the reader can open it full screen. Aim for under 600px. Never size anything from the
+  frame's height (`vh` units, `height: 100%` on `html` or `body`): the frame grows to fit the
+  page, so such a page keeps growing.
 - There is no network: every request is blocked. Inline all CSS, JS, images (as data URLs), and
   data. Chart libraries and web fonts cannot load.
 - There are no popups, storage, or form submission. Clicks on `http(s)` links ask the reader
