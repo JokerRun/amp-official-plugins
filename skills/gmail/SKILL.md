@@ -4,7 +4,7 @@ description: "Reads, searches, sends, archives, and labels Gmail messages. Use w
 builtin-tools:
   - gmail
 metadata:
-  feature: gmail-skill
+  feature: google-workspace-tools
 ---
 
 # Gmail

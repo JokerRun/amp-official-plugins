@@ -9,7 +9,7 @@ builtin-tools:
   - google_sheets_read
   - google_sheets_write
 metadata:
-  feature: gmail-skill
+  feature: google-workspace-tools
 ---
 
 # Google Workspace
